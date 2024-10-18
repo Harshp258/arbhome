@@ -54,35 +54,27 @@ export default function Home() {
         <section className={styles.gridSection}>
           <div className={styles.grid}>
             {/* Our Work */}
-            <Link href="/our-work">
-              <div className={styles.gridItem}>
-                <img src="/images/image2.jpg" alt="Our Work" className={styles.image} />
-                <div className={styles.textOverlay}>Our Work</div>
-              </div>
+            <Link href="/our-work" className={styles.gridItem}>
+              <img src="/images/image2.jpg" alt="Our Work" className={styles.image} />
+              <div className={styles.textOverlay}>Our Work</div>
             </Link>
 
             {/* Our Services */}
-            <Link href="/services">
-              <div className={styles.gridItem}>
-                <img src="/images/image3.jpg" alt="Our Services" className={styles.image} />
-                <div className={styles.textOverlay}>Our Services</div>
-              </div>
+            <Link href="/services" className={styles.gridItem}>
+              <img src="/images/image3.jpg" alt="Our Services" className={styles.image} />
+              <div className={styles.textOverlay}>Our Services</div>
             </Link>
 
             {/* Testimonials */}
-            <Link href="/testimonials">
-              <div className={styles.gridItem}>
-                <img src="/images/qw.jpg" alt="Testimonials" className={styles.image} />
-                <div className={styles.textOverlay}>Testimonials</div>
-              </div>
+            <Link href="/testimonials" className={styles.gridItem}>
+              <img src="/images/qw.jpg" alt="Testimonials" className={styles.image} />
+              <div className={styles.textOverlay}>Testimonials</div>
             </Link>
 
             {/* Get a Quote */}
-            <Link href="/get-a-quote">
-              <div className={styles.gridItem}>
-                <img src="/images/image5.jpg" alt="Get a Quote" className={styles.image} />
-                <div className={styles.textOverlay}>Get a Quote</div>
-              </div>
+            <Link href="/get-a-quote" className={styles.gridItem}>
+              <img src="/images/image5.jpg" alt="Get a Quote" className={styles.image} />
+              <div className={styles.textOverlay}>Get a Quote</div>
             </Link>
           </div>
         </section>
@@ -107,6 +99,11 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <div className="adminLink">
+          <p>Are you admin?</p>
+          <Link href="/admin/login" className="cta">Click here</Link>
+        </div>
       </main>
     </div>
   );
