@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { supabase } from '../../lib/supabaseClient';
-import { v4 as uuidv4 } from 'uuid';
 import styles from '../../styles/admin.module.css';
+import { CldUploadWidget } from 'next-cloudinary';
+import Image from 'next/image';
 
 export default function CreateProject() {
   const [formData, setFormData] = useState({
@@ -11,26 +12,20 @@ export default function CreateProject() {
     address: '',
     description: '',
   });
-  const [images, setImages] = useState([]);
-  const [beforeImage, setBeforeImage] = useState(null);
-  const [afterImage, setAfterImage] = useState(null);
-  const [video, setVideo] = useState(null);
+  const [projectMedia, setProjectMedia] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [session, setSession] = useState(null);
   const router = useRouter();
   
   useEffect(() => {
-    const checkSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
+    supabase.auth.getSession().then(({ data: { session } }) => {
       if (!session) {
         router.push('/admin/login');
       } else {
         setSession(session);
       }
-    };
-
-    checkSession();
+    });
 
     const {
       data: { subscription },
@@ -39,29 +34,23 @@ export default function CreateProject() {
     });
 
     return () => subscription.unsubscribe();
-  }, [router]);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prevState => ({ ...prevState, [name]: value }));
   };
 
-  const handleImageChange = (e, type) => {
-    const files = Array.from(e.target.files);
-    if (type === 'images') {
-      setImages(prev => [...prev, ...files]);
-    } else if (type === 'before') {
-      setBeforeImage(files[0]);
-    } else if (type === 'after') {
-      setAfterImage(files[0]);
+  const handleUpload = (result) => {
+    if (result.event === "success") {
+      const info = result.info;
+      console.log(`Uploaded:`, info);
+      setProjectMedia(prev => [...prev, info]);
     }
   };
 
-  const handleVideoChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setVideo(file);
-    }
+  const handleRemoveMedia = (indexToRemove) => {
+    setProjectMedia(prev => prev.filter((_, index) => index !== indexToRemove));
   };
 
   const handleSubmit = async (e) => {
@@ -70,7 +59,6 @@ export default function CreateProject() {
     setError(null);
 
     try {
-      // Create project
       const { data: project, error: projectError } = await supabase
         .from('projects')
         .insert({
@@ -78,17 +66,12 @@ export default function CreateProject() {
           staging_type: formData.stagingType,
           address: formData.address,
           description: formData.description,
+          project_media: projectMedia.map(media => media.secure_url),
         })
         .select()
         .single();
 
       if (projectError) throw projectError;
-      if (!project) throw new Error('Failed to create project: No data returned');
-
-      // Upload images and video
-      await uploadImages(project.id, images);
-      await uploadBeforeAfterImages(project.id, beforeImage, afterImage);
-      await uploadVideo(project.id, video);
 
       router.push('/admin/dashboard');
     } catch (error) {
@@ -96,84 +79,6 @@ export default function CreateProject() {
       setError(`Failed to create project: ${error.message}`);
     } finally {
       setLoading(false);
-    }
-  };
-
-  const uploadImages = async (projectId, images) => {
-    for (let img of images) {
-      try {
-        const fileName = `${projectId}/${uuidv4()}-${img.name}`;
-        const { error: uploadError } = await supabase.storage
-          .from('project-images')
-          .upload(fileName, img);
-
-        if (uploadError) throw uploadError;
-
-        const { error: insertError } = await supabase.from('images').insert({
-          project_id: projectId,
-          image_url: fileName,
-          is_before: false,
-          is_after: false
-        });
-
-        if (insertError) throw insertError;
-      } catch (error) {
-        console.error(`Error uploading image: ${error.message}`);
-        throw error;
-      }
-    }
-  };
-
-  const uploadBeforeAfterImages = async (projectId, beforeImage, afterImage) => {
-    const uploadImage = async (image, isBefore) => {
-      if (image) {
-        try {
-          const fileName = `${projectId}/${uuidv4()}-${isBefore ? 'before' : 'after'}-${image.name}`;
-          const { error: uploadError } = await supabase.storage
-            .from('project-images')
-            .upload(fileName, image);
-
-          if (uploadError) throw uploadError;
-
-          const { error: insertError } = await supabase.from('images').insert({
-            project_id: projectId,
-            image_url: fileName,
-            is_before: isBefore,
-            is_after: !isBefore
-          });
-
-          if (insertError) throw insertError;
-        } catch (error) {
-          console.error(`Error uploading ${isBefore ? 'before' : 'after'} image: ${error.message}`);
-          throw error;
-        }
-      }
-    };
-
-    await uploadImage(beforeImage, true);
-    await uploadImage(afterImage, false);
-  };
-
-  const uploadVideo = async (projectId, video) => {
-    if (video) {
-      try {
-        const fileName = `${projectId}/${uuidv4()}-${video.name}`;
-        const { error: uploadError } = await supabase.storage
-          .from('project-videos')
-          .upload(fileName, video);
-
-        if (uploadError) throw uploadError;
-
-        const { error: insertError } = await supabase.from('videos').insert({
-          project_id: projectId,
-          video_url: fileName
-        });
-
-        if (insertError) throw insertError;
-      } catch (error) {
-        console.error(`Error uploading video: ${error.message}`);
-        throw error;
-      }
     }
   };
 
@@ -242,42 +147,44 @@ export default function CreateProject() {
           />
         </div>
         <div className={styles.formGroup}>
-          <label>Project Images</label>
-          <input
-            type="file"
-            onChange={(e) => handleImageChange(e, 'images')}
-            multiple
-            accept="image/*"
-            className={styles.fileInput}
-          />
+          <label htmlFor="media">Project Media (Images and Video)</label>
+          <CldUploadWidget
+            uploadPreset="project-images"
+            options={{ 
+              sources: ['local', 'url', 'camera'],
+              multiple: true,
+              maxFiles: 10,
+              resourceType: "auto"
+            }}
+            onUpload={handleUpload}
+          >
+            {({ open }) => (
+              <button onClick={() => open()} type="button" className={styles.uploadButton}>
+                Upload Media
+              </button>
+            )}
+          </CldUploadWidget>
+          
+          <div className={styles.mediaPreview}>
+            {projectMedia.map((media, index) => (
+              <div key={index} className={styles.mediaItem}>
+                {media.resource_type === 'video' ? (
+                  <video src={media.secure_url} controls width="200" height="150" />
+                ) : (
+                  <Image src={media.secure_url} alt={`Project media ${index + 1}`} width={200} height={150} />
+                )}
+                <button 
+                  type="button" 
+                  onClick={() => handleRemoveMedia(index)}
+                  className={styles.removeButton}
+                >
+                  Remove
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className={styles.formGroup}>
-          <label>Before Image</label>
-          <input
-            type="file"
-            onChange={(e) => handleImageChange(e, 'before')}
-            accept="image/*"
-            className={styles.fileInput}
-          />
-        </div>
-        <div className={styles.formGroup}>
-          <label>After Image</label>
-          <input
-            type="file"
-            onChange={(e) => handleImageChange(e, 'after')}
-            accept="image/*"
-            className={styles.fileInput}
-          />
-        </div>
-        <div className={styles.formGroup}>
-          <label>Video</label>
-          <input
-            type="file"
-            onChange={handleVideoChange}
-            accept="video/*"
-            className={styles.fileInput}
-          />
-        </div>
+        
         <button type="submit" className={styles.submitButton} disabled={loading}>
           {loading ? 'Creating...' : 'Create Project'}
         </button>

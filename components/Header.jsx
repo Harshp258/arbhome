@@ -9,7 +9,7 @@ const Header = () => {
       <div className={styles.logoContainer}>
         <Link href="/">
           <Image
-            src="/images/logo.png" // Ensure your logo is in the public/images folder
+            src="/images/logo.png" 
             alt="Company Logo"
             width={150}
             height={65}
@@ -32,10 +32,7 @@ const Header = () => {
             <Link href="/about" className={styles.navLink}>About</Link>
           </li>
           <li className={styles.navItem}>
-            <Link href="/contact" className={styles.navLink}>Contact</Link>
-          </li>
-          <li className={styles.navItem}>
-            <Link href="/contact" className={styles.navLink}>Quick Quote</Link>
+            <Link href="/QuoteForm" className={styles.navLink}>Quick Quote</Link>
           </li>
         </ul>
       </nav>

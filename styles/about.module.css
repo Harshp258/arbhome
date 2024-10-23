@@ -1,0 +1,216 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap');
+
+.aboutContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 40px;
+  font-family: 'Montserrat', sans-serif;
+  color: #333;
+  background-color: #fff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.heroSection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 60px;
+  padding: 40px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 15px;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.5s ease;
+}
+
+.heroSection::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+  transform: rotate(45deg);
+  transition: all 0.8s ease;
+}
+
+.heroSection:hover::before {
+  top: -30%;
+  left: -30%;
+}
+
+.ownerImage {
+  border-radius: 50%;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.heroSection:hover .ownerImage {
+  transform: scale(1.05);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.heroText {
+  flex: 1;
+  padding-left: 40px;
+}
+
+.heroText h1 {
+  font-family: 'Playfair Display', serif;
+  color: #493A7F;
+  font-size: 3rem;
+  margin-bottom: 10px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s forwards;
+}
+
+.heroText h2 {
+  color: #666;
+  font-size: 1.5rem;
+  font-weight: 300;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s 0.2s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.section {
+  margin-bottom: 60px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section h2 {
+  font-family: 'Playfair Display', serif;
+  color: #493A7F;
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+  position: relative;
+  display: inline-block;
+}
+
+.section h2::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 50%;
+  height: 2px;
+  background-color: #493A7F;
+  transition: width 0.3s ease;
+}
+
+.section:hover h2::after {
+  width: 100%;
+}
+
+.section p, .section ul {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #555;
+}
+
+.section ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.section ul li {
+  margin-bottom: 15px;
+  padding-left: 30px;
+  position: relative;
+}
+
+.section ul li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #493A7F;
+  font-weight: bold;
+}
+
+.contactSection {
+  text-align: center;
+  background-color: #f8f9fa;
+  padding: 40px;
+  border-radius: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contactSection:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.contactSection h2 {
+  margin-bottom: 20px;
+}
+
+.contactSection p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+.quoteLink {
+  display: inline-block;
+  background-color: #493A7F;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.quoteLink::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: all 0.5s;
+}
+
+.quoteLink:hover::before {
+  left: 100%;
+}
+
+.quoteLink:hover {
+  background-color: #3c2e66;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(73, 58, 127, 0.3);
+}
+
+@media (max-width: 768px) {
+  .heroSection {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .heroText {
+    padding-left: 0;
+    margin-top: 30px;
+  }
+
+  .section h2 {
+    font-size: 2rem;
+  }
+}

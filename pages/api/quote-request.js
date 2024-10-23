@@ -11,12 +11,10 @@ export default async function handler(req, res) {
       const quoteRequest = new QuoteRequest(req.body);
       await db.collection('quoteRequests').insertOne(quoteRequest);
 
-      // Send email notification
       try {
         await sendQuoteRequestEmail(quoteRequest);
       } catch (emailError) {
         console.error('Error sending email:', emailError);
-        // Continue execution even if email fails
       }
 
       res.status(201).json({ success: true, data: quoteRequest });

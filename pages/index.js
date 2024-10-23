@@ -1,15 +1,43 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from '../styles/Home.module.css';
+import { supabase } from '../lib/supabaseClient';
 
 export default function Home() {
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchProjects();
+  }, []);
+
+  const fetchProjects = async () => {
+    setLoading(true);
+    const { data, error } = await supabase
+      .from('projects')
+      .select('id, title, images(cloudinary_url)')
+      .order('created_at', { ascending: false })
+      .limit(4);  // Limit to 4 projects for the homepage
+    
+    if (error) {
+      console.error('Error fetching projects:', error);
+    } else {
+      setProjects(data.map(project => ({
+        ...project,
+        frontImage: project.images[0]?.cloudinary_url || '/images/placeholder.jpg'
+      })));
+    }
+    setLoading(false);
+  };
+
   return (
     <div className={styles.container}>
       <Head>
-        <title>Your Home Staging Company</title>
+        <title>ARB Home Staging Group</title>
         <meta name="description" content="Professional home staging services to help sell your property faster" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/images/logo.png" />
       </Head>
 
       <main className={styles.main}>
@@ -18,21 +46,22 @@ export default function Home() {
           <div className={styles.heroOverlay}>
             <h1 className={styles.title}>PREMIERE HOME STAGING SERVICES FOR TORONTO & GTA</h1>
             <p className={styles.description}>We transform properties to stand out & sell for more!</p>
-            <Link href="/contact" className={styles.cta}>Request Quick Quote</Link>
+            <Link href="/QuoteForm" className={styles.cta}>
+              Request Quick Quote
+            </Link>
           </div>
         </section>
 
         {/* Quote Section */}
-                  <section className={styles.quote}>
-            <div className={styles.quoteContainer}>
-              <h1>
-                Looking for a Toronto Home Staging Company?
-                <br />
-                You've come to the right place!
-              </h1>
-            </div>
-          </section>
-
+        <section className={styles.quote}>
+          <div className={styles.quoteContainer}>
+            <h1>
+              Looking for a Toronto Home Staging Company?
+              <br />
+              You've come to the right place!
+            </h1>
+          </div>
+        </section>
 
         {/* Video Section */}
         <section className={`${styles.section} ${styles.videoSection}`}>
@@ -44,9 +73,9 @@ export default function Home() {
 
         {/* About Section */}
         <section className={`${styles.section} ${styles.about}`}>
-          <h2>Don’t reduce the price, Increase the appeal</h2>
+          <h2>Don't reduce the price, Increase the appeal</h2>
           <p>
-            We are a professional Toronto & GTA home staging company, passionate about transforming your home to create mass appeal. Whether you’re a Realtor, Homeowner, Builder, or Investor in Toronto, we can help your listing to get that great first impression!
+            We are a professional Toronto & GTA home staging company, passionate about transforming your home to create mass appeal. Whether you're a Realtor, Homeowner, Builder, or Investor in Toronto, we can help your listing to get that great first impression!
           </p>
         </section>
 
@@ -55,25 +84,25 @@ export default function Home() {
           <div className={styles.grid}>
             {/* Our Work */}
             <Link href="/our-work" className={styles.gridItem}>
-              <img src="/images/image2.jpg" alt="Our Work" className={styles.image} />
+              <Image src="/images/image2.jpg" alt="Our Work" layout="fill" objectFit="cover" />
               <div className={styles.textOverlay}>Our Work</div>
             </Link>
 
             {/* Our Services */}
             <Link href="/services" className={styles.gridItem}>
-              <img src="/images/image3.jpg" alt="Our Services" className={styles.image} />
+              <Image src="/images/image3.jpg" alt="Our Services" layout="fill" objectFit="cover" />
               <div className={styles.textOverlay}>Our Services</div>
             </Link>
 
             {/* Testimonials */}
             <Link href="/testimonials" className={styles.gridItem}>
-              <img src="/images/qw.jpg" alt="Testimonials" className={styles.image} />
+              <Image src="/images/qw.jpg" alt="Testimonials" layout="fill" objectFit="cover" />
               <div className={styles.textOverlay}>Testimonials</div>
             </Link>
 
             {/* Get a Quote */}
             <Link href="/get-a-quote" className={styles.gridItem}>
-              <img src="/images/image5.jpg" alt="Get a Quote" className={styles.image} />
+              <Image src="/images/image5.jpg" alt="Get a Quote" layout="fill" objectFit="cover" />
               <div className={styles.textOverlay}>Get a Quote</div>
             </Link>
           </div>
@@ -81,11 +110,11 @@ export default function Home() {
 
         {/* ROI Section */}
         <section className={`${styles.section} ${styles.roi}`}>
-          <h2>Why do you want to stage prior to selling? Here’s the proven ARB of home staging:</h2>
+          <h2>Why do you want to stage prior to selling? Here's the proven ARB of home staging:</h2>
           <div className={styles.roiContainer}>
             <div className={styles.roiItem}>
               <h3>Boost Profits</h3>
-              <p>Did you know that on average, 86% of staged homes see a 6-25% increase in the final sale price? It’s simple: strategic staging reflects the potential buyer’s desired lifestyle, making them fall in love with the property.</p>
+              <p>Did you know that on average, 86% of staged homes see a 6-25% increase in the final sale price? It's simple: strategic staging reflects the potential buyer's desired lifestyle, making them fall in love with the property.</p>
             </div>
 
             <div className={styles.roiItem}>
@@ -100,10 +129,24 @@ export default function Home() {
           </div>
         </section>
 
-        <div className="adminLink">
-          <p>Are you admin?</p>
-          <Link href="/admin/login" className="cta">Click here</Link>
-        </div>
+        {/* Our Work Section */}
+        <section className={styles.ourWorkSection}>
+          <h2>Our Work</h2>
+          <div className={styles.projectGrid}>
+            {projects.map((project) => (
+              <Link href={`/projects/${project.id}`} key={project.id} className={styles.projectCard}>
+                <Image 
+                  src={project.frontImage} 
+                  alt={project.title} 
+                  layout="fill" 
+                  objectFit="cover"
+                  className={styles.projectImage}
+                />
+                <h3 className={styles.projectTitle}>{project.title}</h3>
+              </Link>
+            ))}
+          </div>
+        </section>
       </main>
     </div>
   );
