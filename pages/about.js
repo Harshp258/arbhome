@@ -19,6 +19,13 @@ const Section = ({ title, children }) => {
 
 export default function About() {
   return (
+    <>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
     <div className={styles.aboutContainer}>
       <div className={styles.heroSection}>
         <Image 
@@ -70,5 +77,6 @@ export default function About() {
         <a href="/quote" className={styles.quoteLink}>Get a Quick Quote</a>
       </div>
     </div>
+    </>
   );
 }

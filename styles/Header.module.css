@@ -1,90 +1,162 @@
+/* Header styling */
 .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .headerContent {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
-    position: sticky; /* Make the header sticky */
-    top: 0; /* Stick to the top */
-    z-index: 10; /* Ensure it stays above other elements */
-    background: transparent; /* Set background to transparent initially */
-    transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease; /* Smooth transition */
-}
-
-.header.visible {
-    background: white; /* Set background to white when visible */
-}
-
-.header * {
-    position: relative; /* Ensure content is above any background */
-    z-index: 2; /* Make header content visible */
-    color: black; /* Change text color to black */
-}
-
-.logoContainer {
+    padding: 1rem 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+    z-index: 1002; /* Ensure header content stays above the overlay */
+  }
+  
+  .logoContainer {
     flex-shrink: 0;
-}
-
-.logo {
+    z-index: 1002; /* Ensure logo stays above the overlay */
+  }
+  
+  .logo {
     cursor: pointer;
-}
-
-.nav {
-    flex-grow: 1;
-}
-
-.navList {
+  }
+  
+  /* Nav styling for default (horizontal) layout */
+  .nav {
     display: flex;
-    justify-content: flex-end;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .navList {
+    display: flex;
     list-style-type: none;
     margin: 0;
     padding: 0;
-}
-
-.navItem {
+  }
+  
+  .navItem {
     margin-left: 2rem;
-}
-
-.navLink {
+  }
+  
+  .navLink {
     text-decoration: none;
-    color: black; /* Change link color to black */
+    color: #333;
     font-weight: 500;
+    font-size: 1rem; /* Adjusted font size for visibility */
+    position: relative;
     transition: color 0.3s ease;
-}
-
-.navLink:hover {
-    color: #007bff; /* Change this to your desired hover color */
-}
-
-/* Hide header when scrolling down */
-.hidden {
-    transform: translateY(-100%); /* Move header out of view */
-    opacity: 0; /* Fade out */
-}
-
-.visible {
-    transform: translateY(0); /* Reset position */
-    opacity: 1; /* Fade in */
-}
-
-@media (max-width: 768px) {
-    .header {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 1rem; /* Adjust padding for mobile */
+  }
+  
+  .navLink::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #493A7F;
+    transition: width 0.3s ease;
+  }
+  
+  .navLink:hover::after {
+    width: 100%;
+  }
+  
+  /* Hamburger menu styling */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    z-index: 1002; /* Ensure hamburger stays above the overlay */
+  }
+  
+  .hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    margin-bottom: 5px;
+    transition: all 0.3s ease;
+  }
+  
+  /* Hidden and visible state for transitions */
+  .hidden {
+    transform: translateY(-100%);
+  }
+  
+  .visible {
+    transform: translateY(0);
+  }
+  
+  /* Responsive (mobile view) styles */
+  @media (max-width: 768px) {
+    /* Hide the nav bar initially */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(255, 255, 255, 0.95);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      z-index: 1001;
+      width: 100vw; /* Full width */
+      height: 100vh; /* Full height */
     }
-
+  
+    .nav.open {
+      transform: translateX(0); /* Show the menu when open */
+    }
+  
     .navList {
-        flex-direction: column; /* Stack nav items vertically on mobile */
-        align-items: flex-start; /* Align items to the left */
-        margin-top: 1rem; /* Add space above nav items */
-        width: 100%; /* Full width on mobile */
-        padding-left: 0; /* Remove default padding */
-        list-style-type: none; /* Remove bullets */
+      display: flex;
+      flex-direction: column; /* Stack items vertically */
+      align-items: center;
     }
-
+  
     .navItem {
-        margin-left: 0; /* Remove left margin on mobile */
-        margin-bottom: 0.5rem; /* Add space between items */
-        width: auto; /* Allow full width for nav items */
+      margin: 1rem 0; /* More space between items */
     }
-}
+  
+    .navLink {
+      font-size: 1.5rem; /* Larger font size for mobile */
+    }
+  
+    .hamburger {
+      display: flex; /* Show hamburger icon on mobile */
+    }
+  
+    /* Hamburger animation for open state */
+    .header.open .hamburger span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+  
+    .header.open .hamburger span:nth-child(2) {
+      opacity: 0;
+    }
+  
+    .header.open .hamburger span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px);
+    }
+  
+    /* Ensure the header background doesn't overlap the menu */
+    .header.open {
+      background-color: transparent;
+      box-shadow: none;
+    }
+  }
+  

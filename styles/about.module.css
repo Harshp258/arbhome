@@ -3,7 +3,7 @@
 .aboutContainer {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 40px;
+  padding: 60px 40px;
   font-family: 'Montserrat', sans-serif;
   color: #333;
   background-color: #fff;
@@ -14,13 +14,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 60px;
-  padding: 40px;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  margin-bottom: 80px;
+  padding: 60px;
+  background: linear-gradient(rgba(73, 58, 127, 0.8), rgba(73, 58, 127, 0.8)), url('/images/img7.jpg');
+  background-size: cover;
+  background-position: center;
   border-radius: 15px;
   overflow: hidden;
   position: relative;
-  transition: all 0.5s ease;
 }
 
 .heroSection::before {
@@ -42,33 +43,32 @@
 
 .ownerImage {
   border-radius: 50%;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   transition: transform 0.5s ease, box-shadow 0.5s ease;
 }
 
 .heroSection:hover .ownerImage {
   transform: scale(1.05);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
 }
 
 .heroText {
   flex: 1;
-  padding-left: 40px;
+  padding-left: 60px;
+  color: #fff;
 }
 
 .heroText h1 {
   font-family: 'Playfair Display', serif;
-  color: #493A7F;
-  font-size: 3rem;
-  margin-bottom: 10px;
+  font-size: 3.5rem;
+  margin-bottom: 20px;
   opacity: 0;
   transform: translateY(20px);
   animation: fadeInUp 0.8s forwards;
 }
 
 .heroText h2 {
-  color: #666;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: 300;
   opacity: 0;
   transform: translateY(20px);
@@ -83,7 +83,7 @@
 }
 
 .section {
-  margin-bottom: 60px;
+  margin-bottom: 80px;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.5s ease, transform 0.5s ease;
@@ -97,8 +97,8 @@
 .section h2 {
   font-family: 'Playfair Display', serif;
   color: #493A7F;
-  font-size: 2.2rem;
-  margin-bottom: 20px;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
   position: relative;
   display: inline-block;
 }
@@ -106,10 +106,10 @@
 .section h2::after {
   content: '';
   position: absolute;
-  bottom: -5px;
+  bottom: -10px;
   left: 0;
   width: 50%;
-  height: 2px;
+  height: 3px;
   background-color: #493A7F;
   transition: width 0.3s ease;
 }
@@ -130,7 +130,7 @@
 }
 
 .section ul li {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   padding-left: 30px;
   position: relative;
 }
@@ -145,32 +145,35 @@
 
 .contactSection {
   text-align: center;
-  background-color: #f8f9fa;
-  padding: 40px;
+  background: linear-gradient(135deg, #493A7F, #7A67BB);
+  padding: 60px;
   border-radius: 15px;
+  color: #fff;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .contactSection:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 15px 30px rgba(73, 58, 127, 0.3);
 }
 
 .contactSection h2 {
-  margin-bottom: 20px;
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
 }
 
 .contactSection p {
   font-size: 1.2rem;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 .quoteLink {
   display: inline-block;
-  background-color: goldenrod;
-  color: white;
-  padding: 12px 25px;
-  border-radius: 30px;
+  background-color: #fff;
+  color: #493A7F;
+  padding: 15px 30px;
+  border-radius: 50px;
   text-decoration: none;
   font-weight: 600;
   transition: all 0.3s ease;
@@ -194,15 +197,16 @@
 }
 
 .quoteLink:hover {
-  background-color: #3c2e66;
+  background-color: #f0f0f0;
   transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(73, 58, 127, 0.3);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 @media (max-width: 768px) {
   .heroSection {
     flex-direction: column;
     text-align: center;
+    padding: 40px 20px;
   }
 
   .heroText {
@@ -210,7 +214,19 @@
     margin-top: 30px;
   }
 
+  .heroText h1 {
+    font-size: 2.5rem;
+  }
+
+  .heroText h2 {
+    font-size: 1.5rem;
+  }
+
   .section h2 {
     font-size: 2rem;
+  }
+
+  .contactSection {
+    padding: 40px 20px;
   }
 }

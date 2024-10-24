@@ -50,6 +50,12 @@ export default function ProjectDetail() {
   const video = projectMedia.find(url => url.includes('video'));
 
   return (
+    <>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
     <div className={styles.projectDetail}>
       <div className={styles.heroSection}>
         {video ? (
@@ -123,5 +129,6 @@ export default function ProjectDetail() {
         </div>
       )}
     </div>
+    </>
   );
 }
