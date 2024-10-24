@@ -17,8 +17,8 @@ const Footer = () => {
       </div>
       <div className={styles.contactInfo}>
         <h3 className={styles.heading}>Contact Us</h3>
-        <p>Email: <a href="mailto:info@example.com">info@example.com</a></p>
-        <p>Phone: <a href="tel:+1234567890">+1 (234) 567-890</a></p>
+        <p>Email: <a href="mailto:arbhomestaging904@gmail.com.com">info@example.com</a></p>
+        <p>Phone: <a href="tel:+16479614352">+1 (647) 961-4352</a></p>
         <p>Address: 123 Staging Ave, Suite 100, City, State, ZIP</p>
       </div>
     </footer>
