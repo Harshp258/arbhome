@@ -1,56 +1,177 @@
+/* Services Page - Merged Styles from About Page */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap');
+
 .servicesContainer {
-    text-align: center;
-    padding: 2rem;
-  }
-  
-  .title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-  }
-  
-  .subtitle {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-    color: #666;
-  }
-  
+  text-align: center;
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Montserrat', sans-serif;
+  color: #333;
+  background-color: #fff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 15px; /* Similar rounded corners */
+}
+
+/* Title & Subtitle */
+.title {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #493A7F; /* Matching primary color */
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  color: #666;
+}
+
+/* Services Grid */
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Display 2 cards per row */
+  gap: 2rem; /* Adds a gap between service cards */
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Service Card */
+.serviceCard {
+  position: relative; /* For pseudo-element positioning */
+  text-align: left;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 9px 45px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+  transition: transform 1.6s ease, box-shadow 0.7s ease;
+  border: 2px solid transparent;
+  font-family: 'Montserrat', sans-serif;
+  height: 300px; /* Set a fixed height for uniformity */
+  background-size: cover; /* Make background cover the card */
+  background-position: center; /* Center the background image */
+  opacity: 0.8;
+  overflow: hidden; /* Hide overflow for the pseudo-element */
+}
+
+.serviceCard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  border-color: #a597d7;
+  background: linear-gradient(135deg, #f8f8f8, #ececec);
+}
+
+/* Service Icon */
+.serviceIcon {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 1rem;
+  object-fit: contain;
+}
+
+/* Service Title */
+.serviceTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #493A7F;
+}
+
+/* Service Description */
+.serviceDescription {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #555;
+}
+
+/* How It Works Section */
+.howItWorksSection {
+  text-align: center;
+  margin: 4rem 0;
+}
+
+.howItWorksTitle {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.howItWorksImage {
+  border-radius: 12px;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Quick Chat Section */
+.quickChatSection {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.quickChatHeader {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  color: #493A7F;
+  margin-bottom: 20px;
+}
+
+.callUsButton {
+  display: inline-block;
+  background-color: goldenrod;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.callUsButton:hover {
+  background-color: #7363ab;
+  transform: translateY(-3px);
+}
+
+.callUsButton:active {
+  background-color: gold;
+}
+
+/* Responsive Styling */
+@media (max-width: 1024px) {
   .servicesGrid {
-    display: flex;
-    justify-content: space-around;
-    align-items: flex-start;
-    flex-wrap: wrap;
+    grid-template-columns: 1fr 1fr; /* Keep 2 cards per row for tablets and medium screens */
   }
-  
+
   .serviceCard {
-    flex-basis: 22%;
-    text-align: left;
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    background-color: #fff;
+    flex-basis: 48%; /* Adjust width to maintain the grid layout */
   }
-  
-  .serviceCard:hover {
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+
+  .quickChatHeader {
+    font-size: 2rem;
   }
-  
-  .icon {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .servicesGrid {
+    grid-template-columns: 1fr; /* Stack the cards on smaller screens */
   }
-  
-  .serviceTitle {
-    font-size: 1.25rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
+
+  .serviceCard {
+    flex-basis: 80%;
   }
-  
-  .serviceDescription {
+}
+
+@media (max-width: 600px) {
+  .quickChatHeader {
+    font-size: 1.5rem;
+  }
+
+  .callUsButton {
     font-size: 1rem;
-    line-height: 1.5;
-    color: #666;
+    padding: 10px 20px;
   }
-  
+}

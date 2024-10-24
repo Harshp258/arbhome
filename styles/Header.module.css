@@ -1,4 +1,3 @@
-
 .header {
     display: flex;
     justify-content: space-between;
@@ -7,7 +6,12 @@
     position: sticky; /* Make the header sticky */
     top: 0; /* Stick to the top */
     z-index: 10; /* Ensure it stays above other elements */
-    background: transparent; /* Set background to transparent */
+    background: transparent; /* Set background to transparent initially */
+    transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease; /* Smooth transition */
+}
+
+.header.visible {
+    background: white; /* Set background to white when visible */
 }
 
 .header * {
@@ -49,6 +53,17 @@
 
 .navLink:hover {
     color: #007bff; /* Change this to your desired hover color */
+}
+
+/* Hide header when scrolling down */
+.hidden {
+    transform: translateY(-100%); /* Move header out of view */
+    opacity: 0; /* Fade out */
+}
+
+.visible {
+    transform: translateY(0); /* Reset position */
+    opacity: 1; /* Fade in */
 }
 
 @media (max-width: 768px) {

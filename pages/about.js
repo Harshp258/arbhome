@@ -24,8 +24,8 @@ export default function About() {
         <Image 
           src="/images/owner.jpeg" 
           alt="Bhavika Patel"
-          width={300}
-          height={300}
+          width={310}
+          height={320}
           className={styles.ownerImage}
         />
         <div className={styles.heroText}>
