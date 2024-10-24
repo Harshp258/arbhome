@@ -1,46 +1,102 @@
 .footer {
-  display: flex; /* Use flexbox for layout */
-  justify-content: space-between; /* Space between left and right sections */
-  align-items: center; /* Center items vertically */
-  color: white; /* Set text color to white */
-  background-color:#493A7F; /* Light background color */
+  background-color: #493A7F;
+  color: #ffffff;
   padding: 2rem;
+  font-family: 'Montserrat', sans-serif;
 }
 
-.contactInfo {
-  text-align: right; /* Align contact info to the right */
+.footerContent {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.socialMedia {
-  text-align: left; /* Align social media links to the left */
+/* For larger screens */
+.leftSection {
+  order: 1; /* Default order */
 }
+
+.rightSection {
+  order: 2; /* Ensures this stays on the right side */
+}
+
+/* For smaller screens (mobile) */
+@media (max-width: 768px) {
+  .footerContent {
+    flex-direction: column;
+    align-items: flex-start; /* Left-align items on mobile */
+  }
+
+  .leftSection, .rightSection {
+    margin-bottom: 2rem;
+    order: unset; /* Removes any specific order on mobile */
+  }
+
+  .footerBottom {
+    text-align: center; /* Keeps centered on mobile */
+  }
+}
+
 
 .heading {
-  margin-bottom: 0.5rem;
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: white; /* Ensure heading color is white */
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
 }
 
-.footer p {
-  margin: 0.25rem 0;
-  color: white; /* Ensure paragraph color is white */
-}
-
-.socialList {
+.socialList, .contactList {
   list-style-type: none;
   padding: 0;
 }
 
-.socialList li {
-  display: inline; /* Display items in a row */
-  margin-right: 12px; /* Space between items */
+.socialList li, .contactList li {
+  margin-bottom: 0.5rem;
+}
+
+.socialList a, .contactList a, .contactList li {
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  text-decoration: none;
 }
 
 .icon {
-  .icon {
-    margin-right: 2px; /* Space between icon and text */
-    font-size: 22px; /* Adjust size here */
+  margin-right: 10px;
+  min-width: 20px; /* Ensures consistent spacing */
+}
+
+.footerBottom {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+}
+
+.adminLink {
+  color: #f0c040;
+  text-decoration: none;
+  margin-left: 1rem;
+}
+
+.adminLink:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .footerContent {
+    flex-direction: column;
   }
-  
+
+  .leftSection, .rightSection {
+    margin-bottom: 2rem;
+  }
+
+  .footerBottom {
+    text-align: center;
+  }
+
+  .adminLink {
+    display: block;
+    margin-left: 0;
+    margin-top: 0.5rem;
+  }
 }
