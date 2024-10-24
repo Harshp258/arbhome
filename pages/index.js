@@ -108,28 +108,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ROI Section */}
-        <section className={`${styles.section} ${styles.roi}`}>
-          <h2>Why do you want to stage prior to selling? Here's the proven ARB of home staging:</h2>
-          <div className={styles.roiContainer}>
-            <div className={styles.roiItem}>
-              <h3>Boost Profits</h3>
-              <p>Did you know that on average, 86% of staged homes see a 6-25% increase in the final sale price? It's simple: strategic staging reflects the potential buyer's desired lifestyle, making them fall in love with the property.</p>
-            </div>
-
-            <div className={styles.roiItem}>
-              <h3>Faster Sales</h3>
-              <p>86% of staged homes sell faster than unstaged homes. In an industry where time is money, home staging is like taking a giant leap over competitors and toward the signing table.</p>
-            </div>
-
-            <div className={styles.roiItem}>
-              <h3>First Impressions Matter</h3>
-              <p>90% of buyers start their home search online, which means high-quality listing photos matter. In fact, 77% of potential buyers could better visualize the property as their future home when staged!</p>
-            </div>
-          </div>
-        </section>
-
-        {/* Our Work Section */}
+       {/* Our Work Section */}
+       
         <section className={styles.ourWorkSection}>
           <h2>Our Work</h2>
           <div className={styles.projectGrid}>
