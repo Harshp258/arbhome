@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import styles from '/styles/Header.module.css';
 
 const Header = () => {
   const [isVisible, setIsVisible] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const router = useRouter();
+  const isHomePage = router.pathname === '/';
   let lastScrollY = 0;
 
   const handleScroll = () => {
     if (typeof window !== 'undefined') {
       const currentScrollY = window.scrollY;
+      
+      setIsScrolled(currentScrollY > 50);
+
       if (currentScrollY > lastScrollY) {
         setIsVisible(false);
       } else {
@@ -32,7 +39,12 @@ const Header = () => {
   };
 
   return (
-    <header className={`${styles.header} ${isVisible ? styles.visible : styles.hidden}`}>
+    <header className={`
+      ${styles.header} 
+      ${isScrolled ? styles.scrolled : ''} 
+      ${isVisible ? styles.visible : styles.hidden}
+      ${isHomePage ? styles.homePage : ''}
+    `}>
       <div className={styles.headerContent}>
         <div className={styles.logoContainer}>
           <Link href="/">
