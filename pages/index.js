@@ -49,7 +49,7 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>ARB Home Staging Group | Toronto's Premier Home Staging</title>
+        <title>ARB Home Staging Group | Toronto&apos;s Premier Home Staging</title>
         <meta name="description" content="Transform your property with ARB Home Staging Group. Professional home staging services in Toronto & GTA to help sell your property faster and for more." />
         <link rel="icon" href="/images/logo.png" />
       </Head>
@@ -69,7 +69,7 @@ export default function Home() {
           <div className={styles.feature}>
             <FaHome className={styles.featureIcon} />
             <h3>Expert Staging</h3>
-            <p>Tailored designs to showcase your property's full potential</p>
+            <p>Tailored designs to showcase your property&apos;s full potential</p>
           </div>
           <div className={styles.feature}>
             <FaClock className={styles.featureIcon} />
@@ -79,7 +79,7 @@ export default function Home() {
           <div className={styles.feature}>
             <FaChartLine className={styles.featureIcon} />
             <h3>Higher Value</h3>
-            <p>Increase your property's perceived value by up to 20%</p>
+            <p>Increase your property&apos;s perceived value by up to 20%</p>
           </div>
         </section>
 
@@ -88,7 +88,7 @@ export default function Home() {
             <h2>
               Looking for a Toronto Home Staging Company?
               <br />
-              You've come to the right place!
+              You&apos;ve come to the right place!
             </h2>
           </div>
         </section>
@@ -127,9 +127,9 @@ export default function Home() {
         </section>
 
         <section className={styles.about}>
-          <h2>Don't reduce the price, Increase the appeal</h2>
+          <h2>Don&apos;t reduce the price, Increase the appeal</h2>
           <p>
-            We are a professional Toronto & GTA home staging company, passionate about transforming your home to create mass appeal. Whether you're a Realtor, Homeowner, Builder, or Investor in Toronto, we can help your listing to get that great first impression!
+            We are a professional Toronto & GTA home staging company, passionate about transforming your home to create mass appeal. Whether you&apos;re a Realtor, Homeowner, Builder, or Investor in Toronto, we can help your listing to get that great first impression!
           </p>
         </section>
 
@@ -171,7 +171,7 @@ export default function Home() {
                   <div className={styles.testimonialContainer}>
                     <div className={styles.testimonial}>
                       <div className={styles.testimonialContent}>
-                        <p>"ARB Home Staging transformed our property beyond our wildest dreams. It sold within a week for above asking price!"</p>
+                        <p>&quot;ARB Home Staging transformed our property beyond our wildest dreams. It sold within a week for above asking price!&quot;</p>
                         <div className={styles.testimonialAuthor}>
                           <Image src="/images/img10.jpg" alt="Sarah M." width={60} height={60} className={styles.authorImage} />
                           <div>
@@ -183,7 +183,7 @@ export default function Home() {
                     </div>
                     <div className={styles.testimonial}>
                       <div className={styles.testimonialContent}>
-                        <p>"The attention to detail and professionalism of ARB Home Staging is unmatched. They truly understand the Toronto market."</p>
+                        <p>&quot;The attention to detail and professionalism of ARB Home Staging is unmatched. They truly understand the Toronto market.&quot;</p>
                         <div className={styles.testimonialAuthor}>
                           <Image src="/images/img15.jpg" alt="John D." width={60} height={60} className={styles.authorImage} />
                           <div>
@@ -201,11 +201,11 @@ export default function Home() {
                 </section>
 
         <section className={styles.roi}>
-          <h2>Why do you want to stage prior to selling? Here's the proven ARB of home staging:</h2>
+          <h2>Why do you want to stage prior to selling? Here&apos;s the proven ARB of home staging:</h2>
           <div className={styles.roiContainer}>
             <div className={styles.roiItem}>
               <h3>Boost Profits</h3>
-              <p>Did you know that on average, 86% of staged homes see a 6-25% increase in the final sale price? It's simple: strategic staging reflects the potential buyer's desired lifestyle, making them fall in love with the property.</p>
+              <p>Did you know that on average, 86% of staged homes see a 6-25% increase in the final sale price? It&apos;s simple: strategic staging reflects the potential buyer&apos;s desired lifestyle, making them fall in love with the property.</p>
             </div>
             <div className={styles.roiItem}>
               <h3>Faster Sales</h3>
@@ -239,7 +239,7 @@ export default function Home() {
                <section className={styles.ctaSection}>
                 <div className={styles.ctaOverlay}>
                   <h2>Ready to Transform Your Property?</h2>
-                  <p>Let's create a space that buyers can't resist.</p>
+                  <p>Let&apos;s create a space that buyers can&apos;t resist.</p>
                   <Link href="/QuoteForm">
                     <span className={styles.cta}>Get Started Today</span>
                   </Link>

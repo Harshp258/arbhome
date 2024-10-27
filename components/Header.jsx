@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -8,11 +8,11 @@ const Header = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const router = useRouter();
   const isHomePage = router.pathname === '/';
-  let lastScrollY = 0;
 
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     if (typeof window !== 'undefined') {
       const currentScrollY = window.scrollY;
       
@@ -23,21 +23,20 @@ const Header = () => {
       } else {
         setIsVisible(true);
       }
-      lastScrollY = currentScrollY;
+      setLastScrollY(currentScrollY);
     }
-  };
+  }, [lastScrollY]);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [handleScroll]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-
   return (
     <header className={`
       ${styles.header} 

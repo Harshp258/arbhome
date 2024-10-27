@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { supabase } from '../../../lib/supabaseClient';
 import styles from '../../../styles/admin.module.css';
 import { CldUploadWidget } from 'next-cloudinary';
+import Image from 'next/image';
 
 export default function EditProject() {
   const [formData, setFormData] = useState({
@@ -19,23 +20,7 @@ export default function EditProject() {
   const router = useRouter();
   const { id } = router.query;
 
-  useEffect(() => {
-    const checkSessionAndFetchProject = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        router.push('/admin/login');
-      } else {
-        setSession(session);
-        if (id) {
-          fetchProject();
-        }
-      }
-    };
-
-    checkSessionAndFetchProject();
-  }, [id, router]);
-
-  const fetchProject = async () => {
+  const fetchProject = useCallback(async () => {
     try {
       const { data, error } = await supabase
         .from('projects')
@@ -59,7 +44,24 @@ export default function EditProject() {
       setError('Failed to load project: ' + error.message);
       setLoading(false);
     }
-  };
+  }, [id]);
+
+  useEffect(() => {
+    const checkSessionAndFetchProject = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        router.push('/admin/login');
+      } else {
+        setSession(session);
+        if (id) {
+          fetchProject();
+        }
+      }
+    };
+
+    checkSessionAndFetchProject();
+  }, [id, router, fetchProject]);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -110,6 +112,13 @@ export default function EditProject() {
   if (error) return <div>Error: {error}</div>;
 
   return (
+    <>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
     <div className={styles.adminContainer}>
       <div className={styles.adminHeader}>
         <h1>Edit Project</h1>
@@ -188,16 +197,22 @@ export default function EditProject() {
             )}
           </CldUploadWidget>
           <div className={styles.mediaPreview}>
-            {projectMedia.map((url, index) => (
-              <div key={index} className={styles.mediaItem}>
-                {url.includes('video') ? (
-                  <video src={url} controls width="200" height="150" />
-                ) : (
-                  <img src={url} alt={`Project media ${index + 1}`} width="200" height="150" />
-                )}
-              </div>
-            ))}
-          </div>
+  {projectMedia.map((url, index) => (
+    <div key={index} className={styles.mediaItem}>
+      {url.includes('video') ? (
+        <video src={url} controls width="200" height="150" />
+      ) : (
+        <Image 
+          src={url} 
+          alt={`Project media ${index + 1}`} 
+          width={200} 
+          height={150}
+          layout="responsive"
+        />
+      )}
+    </div>
+  ))}
+</div>
         </div>
         <button type="submit" className={styles.submitButton} disabled={loading}>
           {loading ? 'Updating...' : 'Update Project'}
@@ -205,5 +220,6 @@ export default function EditProject() {
       </form>
       {error && <p className={styles.error}>{error}</p>}
     </div>
+    </>
   );
 }

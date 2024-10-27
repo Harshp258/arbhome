@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { supabase } from '../../lib/supabaseClient';
 import styles from '../../styles/admin.module.css';
@@ -18,10 +18,14 @@ export default function CreateProject() {
   const [session, setSession] = useState(null);
   const router = useRouter();
   
+  const navigateToLogin = useCallback(() => {
+    router.push('/admin/login');
+  }, [router]);
+
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (!session) {
-        router.push('/admin/login');
+        navigateToLogin();
       } else {
         setSession(session);
       }
@@ -34,7 +38,7 @@ export default function CreateProject() {
     });
 
     return () => subscription.unsubscribe();
-  }, []);
+  }, [navigateToLogin]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -87,6 +91,13 @@ export default function CreateProject() {
   }
 
   return (
+    <>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
     <div className={styles.adminContainer}>
       <div className={styles.adminHeader}>
         <h1>Create New Project</h1>
@@ -191,5 +202,6 @@ export default function CreateProject() {
       </form>
       {error && <p className={styles.error}>{error}</p>}
     </div>
+    </>
   );
 }

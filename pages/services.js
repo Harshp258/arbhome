@@ -26,7 +26,7 @@ export default function Services() {
       <section className={styles.introSection}>
         <p className={styles.description}>
           At ARB Staging, we specialize in creating captivating spaces that sell. Our on-trend inventory and expert styling 
-          skills are designed to appeal to today's discerning buyers. From vacant homes to occupied properties, we offer 
+          skills are designed to appeal to today&apos;s discerning buyers. From vacant homes to occupied properties, we offer 
           comprehensive staging solutions that help your listing stand out in the competitive Toronto real estate market.
         </p>
       </section>
@@ -86,7 +86,7 @@ export default function Services() {
 
       <section className={styles.ctaSection}>
         <h2 className={styles.ctaTitle}>Ready to Transform Your Space?</h2>
-        <a href="tel:+1234567890" className={styles.ctaButton}>Schedule a Consultation</a>
+        <a href="tel:+16479614352" className={styles.ctaButton}>Schedule a Consultation</a>
       </section>
     </div>
     </>
