@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { supabase } from '../../lib/supabaseClient';
 import styles from '../../styles/ProjectDetail.module.css';
@@ -16,13 +16,7 @@ export default function ProjectDetail() {
   const router = useRouter();
   const { id } = router.query;
 
-  useEffect(() => {
-    if (id) {
-      fetchProjectDetails();
-    }
-  }, [id]);
-
-  const fetchProjectDetails = async () => {
+  const fetchProjectDetails = useCallback(async () => {
     try {
       const { data, error } = await supabase
         .from('projects')
@@ -39,7 +33,14 @@ export default function ProjectDetail() {
       setError('Failed to load project details');
       setLoading(false);
     }
-  };
+  }, [id]);
+
+  useEffect(() => {
+    if (id) {
+      fetchProjectDetails();
+    }
+  }, [id, fetchProjectDetails]);
+
 
   if (loading) return <div className={styles.loading}>Loading...</div>;
   if (error) return <div className={styles.error}>Error: {error}</div>;

@@ -10,6 +10,10 @@
   padding: 0;
 }
 
+.homePage .header {
+  position: absolute;
+}
+
 .hero {
   height: 100vh;
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/stagingimg1.jpg') no-repeat center center;
@@ -201,6 +205,7 @@
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .gridItem:hover {
@@ -218,6 +223,56 @@
   font-size: 1.25rem;
   font-weight: bold;
   color: #493A7F;
+}
+
+.ctaSection {
+  position: relative;
+  padding: 6rem 2rem;
+  color: white;
+  text-align: center;
+  background: url('/images/img15.jpg') no-repeat center center;
+  background-size: cover;
+}
+
+.ctaOverlay {
+  position: relative;
+  z-index: 1;
+}
+
+.ctaSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.ctaSection h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.ctaSection p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.ctaSection .cta {
+  background-color: white;
+  color: #493A7F;
+}
+
+.ctaSection .cta:hover {
+  background-color: #f0f0f0;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .testimonialSection {
@@ -294,6 +349,10 @@
   margin-left: 1rem;
 }
 
+
+
+
+
 @media (max-width: 768px) {
   .testimonialContainer {
     flex-direction: column;
@@ -353,43 +412,32 @@
 }
 
 .beforeAfterSection {
-  padding: 6rem 2rem;
+  padding: 3rem;
   background-color: #f9f9f9;
-  text-align: center;
 }
 
 .beforeAfterSection h2 {
+  text-align: center;
   font-family: 'Playfair Display', serif;
   font-size: 2.5rem;
   color: #493A7F;
-  margin-bottom: 3rem;
-}
-
-.ctaSection {
-  padding: 6rem 2rem;
-  background-color: #493A7F;
-  color: white;
-  text-align: center;
-}
-
-.ctaSection h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-
-.ctaSection p {
-  font-size: 1.2rem;
   margin-bottom: 2rem;
 }
 
-.ctaSection .cta {
-  background-color: white;
-  color: #493A7F;
+.beforeAfterContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.ctaSection .cta:hover {
-  background-color: #f0f0f0;
+@media (min-width: 1024px) {
+  .beforeAfterContainer {
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+  }
 }
 
 @media (max-width: 768px) {
@@ -421,6 +469,7 @@
   .roiItem {
     margin-bottom: 2rem;
   }
+
 }
 
 @keyframes fadeInUp {

@@ -52,7 +52,7 @@ export default function About() {
       <Section title="Our Services">
         <ul>
           <li><strong>Consultation:</strong> We begin with an in-depth consultation to understand your needs and the unique features of your property.</li>
-          <li><strong>Staging:</strong> Using our extensive inventory of furniture, art, and accessories, we create a cohesive and attractive design tailored to your home's style.</li>
+          <li><strong>Staging:</strong> Using our extensive inventory of furniture, art, and accessories, we create a cohesive and attractive design tailored to your home&apos;s style.</li>
           <li><strong>Photography:</strong> We provide professional photography to capture the staged home at its best, enhancing online listings and marketing materials.</li>
           <li><strong>De-staging:</strong> Once your property is sold, we efficiently remove all staging items, leaving the home ready for its new owners.</li>
         </ul>

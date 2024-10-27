@@ -1,38 +1,49 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import styles from '/styles/Header.module.css';
 
 const Header = () => {
   const [isVisible, setIsVisible] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  let lastScrollY = 0;
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const router = useRouter();
+  const isHomePage = router.pathname === '/';
 
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     if (typeof window !== 'undefined') {
       const currentScrollY = window.scrollY;
+      
+      setIsScrolled(currentScrollY > 50);
+
       if (currentScrollY > lastScrollY) {
         setIsVisible(false);
       } else {
         setIsVisible(true);
       }
-      lastScrollY = currentScrollY;
+      setLastScrollY(currentScrollY);
     }
-  };
+  }, [lastScrollY]);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [handleScroll]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-
   return (
-    <header className={`${styles.header} ${isVisible ? styles.visible : styles.hidden}`}>
+    <header className={`
+      ${styles.header} 
+      ${isScrolled ? styles.scrolled : ''} 
+      ${isVisible ? styles.visible : styles.hidden}
+      ${isHomePage ? styles.homePage : ''}
+    `}>
       <div className={styles.headerContent}>
         <div className={styles.logoContainer}>
           <Link href="/">

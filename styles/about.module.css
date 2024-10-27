@@ -145,11 +145,33 @@
 
 .contactSection {
   text-align: center;
-  background: linear-gradient(135deg, #493A7F, #7A67BB);
+  margin-bottom: 80px;
   padding: 60px;
+  background: linear-gradient(rgba(73, 58, 127, 0.8), rgba(73, 58, 127, 0.8)), url('/images/img16.jpg');
+  background-size: cover;
+  background-position: center;
   border-radius: 15px;
+  overflow: hidden;
+  position: relative;
   color: #fff;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contactSection::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+  transform: rotate(45deg);
+  transition: all 0.8s ease;
+}
+
+.contactSection:hover::before {
+  top: -30%;
+  left: -30%;
 }
 
 .contactSection:hover {
@@ -161,11 +183,15 @@
   font-family: 'Playfair Display', serif;
   font-size: 2.5rem;
   margin-bottom: 30px;
+  position: relative;
+  z-index: 1;
 }
 
 .contactSection p {
   font-size: 1.2rem;
   margin-bottom: 40px;
+  position: relative;
+  z-index: 1;
 }
 
 .quoteLink {
@@ -179,6 +205,7 @@
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  z-index: 1;
 }
 
 .quoteLink::before {

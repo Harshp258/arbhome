@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { supabase } from '../../lib/supabaseClient';
 import styles from '../../styles/admin.module.css';
 
-const ADMIN_EMAIL = 'arbhomestagging904@gmail.com';
+const ADMIN_EMAIL = 'arbhomestaging904@gmail.com';
 const ADMIN_PASSWORD = 'Bhavika@904';
 
 export default function AdminLogin() {
@@ -37,6 +37,13 @@ export default function AdminLogin() {
   };
 
   return (
+    <>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
     <div className={styles.adminContainer}>
       <div className={styles.adminHeader}>
         <h1>Admin Login</h1>
@@ -68,5 +75,12 @@ export default function AdminLogin() {
       </form>
       {error && <p className={styles.error}>{error}</p>}
     </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    </>
   );
 }

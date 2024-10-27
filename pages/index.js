@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
+import BeforeAfterSlider from '../components/BeforeAfterSlider';
 import { supabase } from '../lib/supabaseClient';
 import { FaHome, FaClock, FaChartLine } from 'react-icons/fa';
 
@@ -48,12 +49,12 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>ARB Home Staging Group | Toronto's Premier Home Staging</title>
+        <title>ARB Home Staging Group | Toronto&apos;s Premier Home Staging</title>
         <meta name="description" content="Transform your property with ARB Home Staging Group. Professional home staging services in Toronto & GTA to help sell your property faster and for more." />
         <link rel="icon" href="/images/logo.png" />
       </Head>
 
-      <main className={styles.main}>
+      <main className={`${styles.main} ${styles.homePage}`}>
         <section className={styles.hero}>
           <div className={styles.heroContent}>
             <h1 className={styles.title}>PREMIERE HOME STAGING SERVICES FOR TORONTO & GTA</h1>
@@ -68,7 +69,7 @@ export default function Home() {
           <div className={styles.feature}>
             <FaHome className={styles.featureIcon} />
             <h3>Expert Staging</h3>
-            <p>Tailored designs to showcase your property's full potential</p>
+            <p>Tailored designs to showcase your property&apos;s full potential</p>
           </div>
           <div className={styles.feature}>
             <FaClock className={styles.featureIcon} />
@@ -78,7 +79,7 @@ export default function Home() {
           <div className={styles.feature}>
             <FaChartLine className={styles.featureIcon} />
             <h3>Higher Value</h3>
-            <p>Increase your property's perceived value by up to 20%</p>
+            <p>Increase your property&apos;s perceived value by up to 20%</p>
           </div>
         </section>
 
@@ -87,12 +88,12 @@ export default function Home() {
             <h2>
               Looking for a Toronto Home Staging Company?
               <br />
-              You've come to the right place!
+              You&apos;ve come to the right place!
             </h2>
           </div>
         </section>
 
-        <section className={styles.ourWorkSection}>
+        <section id="ourWorkSection" className={styles.ourWorkSection}>
           <h2>Our Work</h2>
           {loading ? (
             <div>Loading projects...</div>
@@ -126,52 +127,53 @@ export default function Home() {
         </section>
 
         <section className={styles.about}>
-          <h2>Don't reduce the price, Increase the appeal</h2>
+          <h2>Don&apos;t reduce the price, Increase the appeal</h2>
           <p>
-            We are a professional Toronto & GTA home staging company, passionate about transforming your home to create mass appeal. Whether you're a Realtor, Homeowner, Builder, or Investor in Toronto, we can help your listing to get that great first impression!
+            We are a professional Toronto & GTA home staging company, passionate about transforming your home to create mass appeal. Whether you&apos;re a Realtor, Homeowner, Builder, or Investor in Toronto, we can help your listing to get that great first impression!
           </p>
         </section>
 
-        <section className={styles.gridSection}>
-          <div className={styles.grid}>
-            <Link href="/our-work">
-              <div className={styles.gridItem}>
-                <Image src="/images/image2.jpg" alt="Our Work" layout="fill" objectFit="cover" />
-                <div className={styles.textOverlay}>Our Work</div>
-              </div>
-            </Link>
+                                <section className={styles.gridSection}>
+                                    <div className={styles.grid}>
+                                      <Link href="#ourWorkSection">
+                                        <div className={styles.gridItem}>
+                                          <Image src="/images/image2.jpg" alt="Our Work" layout="fill" objectFit="cover" />
+                                          <div className={styles.textOverlay}>Our Work</div>
+                                        </div>
+                                      </Link>
 
-            <Link href="/services">
-              <div className={styles.gridItem}>
-                <Image src="/images/image3.jpg" alt="Our Services" layout="fill" objectFit="cover" />
-                <div className={styles.textOverlay}>Our Services</div>
-              </div>
-            </Link>
+                                      <Link href="/services">
+                                        <div className={styles.gridItem}>
+                                          <Image src="/images/image3.jpg" alt="Our Services" layout="fill" objectFit="cover" />
+                                          <div className={styles.textOverlay}>Our Services</div>
+                                        </div>
+                                      </Link>
 
-            <Link href="/testimonials">
-              <div className={styles.gridItem}>
-                <Image src="/images/qw.jpg" alt="Testimonials" layout="fill" objectFit="cover" />
-                <div className={styles.textOverlay}>Testimonials</div>
-              </div>
-            </Link>
+                                      <Link href="/about">
+                                        <div className={styles.gridItem}>
+                                          <Image src="/images/qw.jpg" alt="About Us" layout="fill" objectFit="cover" />
+                                          <div className={styles.textOverlay}>About Us</div>
+                                        </div>
+                                      </Link>
 
-            <Link href="/get-a-quote">
-              <div className={styles.gridItem}>
-                <Image src="/images/image5.jpg" alt="Get a Quote" layout="fill" objectFit="cover" />
-                <div className={styles.textOverlay}>Get a Quote</div>
-              </div>
-            </Link>
-          </div>
-        </section>
+                                      <Link href="/QuoteForm">
+                                        <div className={styles.gridItem}>
+                                          <Image src="/images/image5.jpg" alt="Get a Quote" layout="fill" objectFit="cover" />
+                                          <div className={styles.textOverlay}>Get a Quote</div>
+                                        </div>
+                                      </Link>
+                                    </div>
+                                  </section>
 
-                        <section className={styles.testimonialSection}>
+
+                <section className={styles.testimonialSection}>
                   <h2>What Our Clients Say</h2>
                   <div className={styles.testimonialContainer}>
                     <div className={styles.testimonial}>
                       <div className={styles.testimonialContent}>
-                        <p>"ARB Home Staging transformed our property beyond our wildest dreams. It sold within a week for above asking price!"</p>
+                        <p>&quot;ARB Home Staging transformed our property beyond our wildest dreams. It sold within a week for above asking price!&quot;</p>
                         <div className={styles.testimonialAuthor}>
-                          <Image src="/images/img2.jpg" alt="Sarah M." width={60} height={60} className={styles.authorImage} />
+                          <Image src="/images/img10.jpg" alt="Sarah M." width={60} height={60} className={styles.authorImage} />
                           <div>
                             <h4>Sarah M.</h4>
                             <p>Toronto Homeowner</p>
@@ -181,9 +183,9 @@ export default function Home() {
                     </div>
                     <div className={styles.testimonial}>
                       <div className={styles.testimonialContent}>
-                        <p>"The attention to detail and professionalism of ARB Home Staging is unmatched. They truly understand the Toronto market."</p>
+                        <p>&quot;The attention to detail and professionalism of ARB Home Staging is unmatched. They truly understand the Toronto market.&quot;</p>
                         <div className={styles.testimonialAuthor}>
-                          <Image src="/images/img5.jpg" alt="John D." width={60} height={60} className={styles.authorImage} />
+                          <Image src="/images/img15.jpg" alt="John D." width={60} height={60} className={styles.authorImage} />
                           <div>
                             <h4>John D.</h4>
                             <p>Real Estate Agent</p>
@@ -193,17 +195,17 @@ export default function Home() {
                     </div>
                   </div>
                   <div className={styles.googleCertified}>
-                    <Image src="/images/img6.jpeg" alt="Google Certified" width={100} height={100} />
-                    <p>Google Certified Home Staging Company</p>
+                    <Image src="/images/google.png" alt="Google Certified" width={210} height={70} />
+                    <p>Certified Home Staging Company</p>
                   </div>
                 </section>
 
         <section className={styles.roi}>
-          <h2>Why do you want to stage prior to selling? Here's the proven ARB of home staging:</h2>
+          <h2>Why do you want to stage prior to selling? Here&apos;s the proven ARB of home staging:</h2>
           <div className={styles.roiContainer}>
             <div className={styles.roiItem}>
               <h3>Boost Profits</h3>
-              <p>Did you know that on average, 86% of staged homes see a 6-25% increase in the final sale price? It's simple: strategic staging reflects the potential buyer's desired lifestyle, making them fall in love with the property.</p>
+              <p>Did you know that on average, 86% of staged homes see a 6-25% increase in the final sale price? It&apos;s simple: strategic staging reflects the potential buyer&apos;s desired lifestyle, making them fall in love with the property.</p>
             </div>
             <div className={styles.roiItem}>
               <h3>Faster Sales</h3>
@@ -217,20 +219,32 @@ export default function Home() {
         </section>
 
         <section className={styles.beforeAfterSection}>
-          <h2>The ARB Transformation</h2>
-          <div className={styles.beforeAfterSlider}>
-            {/* Placeholder for before/after slider */}
-            <p>Before/After slider will be implemented here</p>
-          </div>
-        </section>
+        <h2>The ARB Transformation</h2>
+        <div className={styles.beforeAfterContainer}>
+          <BeforeAfterSlider 
+            beforeImage="/images/Before1.png"
+            afterImage="/images/after1.png"
+            alt="Living Room Transformation"
+          />
+          <BeforeAfterSlider 
+            beforeImage="/images/before3.png"
+            afterImage="/images/after3.png"
+            alt="Living Room Transformation"
+          />
+        </div>
+      </section>
 
-        <section className={styles.ctaSection}>
-          <h2>Ready to Transform Your Property?</h2>
-          <p>Let's create a space that buyers can't resist.</p>
-          <Link href="/QuoteForm">
-            <span className={styles.cta}>Get Started Today</span>
-          </Link>
-        </section>
+
+
+               <section className={styles.ctaSection}>
+                <div className={styles.ctaOverlay}>
+                  <h2>Ready to Transform Your Property?</h2>
+                  <p>Let&apos;s create a space that buyers can&apos;t resist.</p>
+                  <Link href="/QuoteForm">
+                    <span className={styles.cta}>Get Started Today</span>
+                  </Link>
+                </div>
+              </section>
       </main>
     </div>
   );
