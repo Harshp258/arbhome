@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Image from "next/legacy/image";
+import Image from 'next/image';
 import styles from '../styles/QuoteForm.module.css';
 
 const Modal = ({ message, onClose }) => {
