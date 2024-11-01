@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { supabase } from '../../lib/supabaseClient';
 import styles from '../../styles/ProjectDetail.module.css';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import { FaHome, FaMapMarkerAlt, FaClipboardList } from 'react-icons/fa';
 import Masonry from 'react-masonry-css';
 import { motion } from 'framer-motion';

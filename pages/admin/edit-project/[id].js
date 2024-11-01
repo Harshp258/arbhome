@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { supabase } from '../../../lib/supabaseClient';
 import styles from '../../../styles/admin.module.css';
 import { CldUploadWidget } from 'next-cloudinary';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 
 export default function EditProject() {
   const [formData, setFormData] = useState({

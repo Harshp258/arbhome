@@ -1,5 +1,5 @@
 import React from 'react';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import { useInView } from 'react-intersection-observer';
 import styles from '../styles/about.module.css';
 

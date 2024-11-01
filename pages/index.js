@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import styles from '../styles/Home.module.css';
 import BeforeAfterSlider from '../components/BeforeAfterSlider';
 import { supabase } from '../lib/supabaseClient';
