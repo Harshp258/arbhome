@@ -30,6 +30,7 @@ const QuoteForm = () => {
 
   const [showModal, setShowModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -38,6 +39,7 @@ const QuoteForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
     try {
       const response = await fetch('/api/quote-request', {
         method: 'POST',
@@ -53,8 +55,11 @@ const QuoteForm = () => {
     } catch (error) {
       console.error('Error:', error);
       setErrorMessage('Failed to submit quote request. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
+
 
   return (
     <>
@@ -182,23 +187,36 @@ const QuoteForm = () => {
               rows="4"
             />
           </div>
-          <button type="submit" className={styles.submitButton}>
-            Submit Quote Request
-          </button>
-        </form>
-        {errorMessage && (
-          <p className={styles.errorMessage}>{errorMessage}</p>
+          <button 
+              type="submit" 
+              className={`${styles.submitButton} ${isSubmitting ? styles.submitting : ''}`}
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? (
+                <>
+                  Submitting
+                  <span className={styles.dots}>
+                    <span>.</span><span>.</span><span>.</span>
+                  </span>
+                </>
+              ) : (
+                'Submit Quote Request'
+              )}
+            </button>
+          </form>
+          {errorMessage && (
+            <p className={styles.errorMessage}>{errorMessage}</p>
+          )}
+        </div>
+        {showModal && (
+          <Modal 
+            message="Your response is valuable to us. Our company will contact you soon within 24 hours."
+            onClose={() => setShowModal(false)}
+          />
         )}
       </div>
-      {showModal && (
-        <Modal 
-          message="Your response is valuable to us. Our company will contact you soon within 24 hours."
-          onClose={() => setShowModal(false)}
-        />
-      )}
-    </div>
-    <br />
-    <br />
+      <br />
+      <br />
     </>
   );
 };
