@@ -50,8 +50,8 @@ const Header = () => {
             <Image
               src="/images/logo.png" 
               alt="Company Logo"
-              width={150}
-              height={65}
+              width={200}
+              height={90}
               className={styles.logo}
             />
           </Link>

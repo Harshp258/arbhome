@@ -2,6 +2,7 @@ import React from 'react';
 import Image from "next/legacy/image";
 import { useInView } from 'react-intersection-observer';
 import styles from '../styles/about.module.css';
+import Link from 'next/link';
 
 const Section = ({ title, children }) => {
   const [ref, inView] = useInView({
@@ -53,6 +54,7 @@ export default function About() {
         <ul>
           <li><strong>Consultation:</strong> We begin with an in-depth consultation to understand your needs and the unique features of your property.</li>
           <li><strong>Staging:</strong> Using our extensive inventory of furniture, art, and accessories, we create a cohesive and attractive design tailored to your home&apos;s style.</li>
+          <li><strong>Showcase:</strong> We highlight your property&apos;s best features, creating focal points that draw potential buyers&apos; attention and help them envision living in the space.</li>
           <li><strong>Photography:</strong> We provide professional photography to capture the staged home at its best, enhancing online listings and marketing materials.</li>
           <li><strong>De-staging:</strong> Once your property is sold, we efficiently remove all staging items, leaving the home ready for its new owners.</li>
         </ul>
@@ -74,7 +76,9 @@ export default function About() {
       <div className={styles.contactSection}>
         <h2>Contact Us</h2>
         <p>Ready to transform your property and achieve your selling goals? Contact us today to schedule a consultation and see how ARB Home Staging can make a difference in your home sale.</p>
-        <a href="/quote" className={styles.quoteLink}>Get a Quick Quote</a>
+        <Link href="/QuoteForm">
+              <span className={styles.quoteLink}>Get a Quick Quote</span>
+            </Link>
       </div>
     </div>
     </>
