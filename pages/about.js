@@ -34,7 +34,6 @@ export default function About() {
           alt="Bhavika Patel"
           width={310}
           height={320}
-          layout="fill" objectFit="cover"
           className={styles.ownerImage}
         />
         <div className={styles.heroText}>
