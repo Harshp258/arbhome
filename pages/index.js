@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import Image from "next/legacy/image";
+import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 import BeforeAfterSlider from '../components/BeforeAfterSlider';
 import { supabase } from '../lib/supabaseClient';
@@ -106,9 +106,9 @@ export default function Home() {
                       <Image 
                         src={project.frontImage} 
                         alt={project.title} 
-                        layout="fill" 
-                        objectFit="cover"
                         className={styles.projectImage}
+                         layout="fill"
+                          objectFit="cover"
                       />
                     </div>
                     <h3 className={styles.projectTitle}>{project.title}</h3>
@@ -137,28 +137,28 @@ export default function Home() {
                                     <div className={styles.grid}>
                                       <Link href="#ourWorkSection">
                                         <div className={styles.gridItem}>
-                                          <Image src="/images/image2.jpg" alt="Our Work" layout="fill" objectFit="cover" />
+                                          <Image src="/images/image2.jpg" alt="Our Work"  layout="fill" objectFit="cover"  />
                                           <div className={styles.textOverlay}>Our Work</div>
                                         </div>
                                       </Link>
 
                                       <Link href="/services">
                                         <div className={styles.gridItem}>
-                                          <Image src="/images/image3.jpg" alt="Our Services" layout="fill" objectFit="cover" />
+                                          <Image src="/images/image3.jpg" alt="Our Services"  layout="fill" objectFit="cover"/>
                                           <div className={styles.textOverlay}>Our Services</div>
                                         </div>
                                       </Link>
 
                                       <Link href="/about">
                                         <div className={styles.gridItem}>
-                                          <Image src="/images/qw.jpg" alt="About Us" layout="fill" objectFit="cover" />
+                                          <Image src="/images/qw.jpg" alt="About Us"  layout="fill" objectFit="cover" />
                                           <div className={styles.textOverlay}>About Us</div>
                                         </div>
                                       </Link>
 
                                       <Link href="/QuoteForm">
                                         <div className={styles.gridItem}>
-                                          <Image src="/images/image5.jpg" alt="Get a Quote" layout="fill" objectFit="cover" />
+                                          <Image src="/images/image5.jpg" alt="Get a Quote"  layout="fill" objectFit="cover" />
                                           <div className={styles.textOverlay}>Get a Quote</div>
                                         </div>
                                       </Link>
@@ -185,7 +185,7 @@ export default function Home() {
                       <div className={styles.testimonialContent}>
                         <p>&quot;The attention to detail and professionalism of ARB Home Staging is unmatched. They truly understand the Toronto market.&quot;</p>
                         <div className={styles.testimonialAuthor}>
-                          <Image src="/images/img15.jpg" alt="John D." width={60} height={60} layout="fill" objectFit="cover" className={styles.authorImage} />
+                          <Image src="/images/img15.jpg" alt="John D." width={60} height={60} layout="fill" objectFit="cover"  className={styles.authorImage} />
                           <div>
                             <h4>John D.</h4>
                             <p>Real Estate Agent</p>
