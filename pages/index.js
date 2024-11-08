@@ -173,7 +173,7 @@ export default function Home() {
                       <div className={styles.testimonialContent}>
                         <p>&quot;ARB Home Staging transformed our property beyond our wildest dreams. It sold within a week for above asking price!&quot;</p>
                         <div className={styles.testimonialAuthor}>
-                          <Image src="/images/img10.jpg" alt="Sarah M." width={60} height={60} className={styles.authorImage} />
+                          <Image src="/images/img10.jpg" alt="Sarah M." width={60} height={60} layout="fill" objectFit="cover" className={styles.authorImage} />
                           <div>
                             <h4>Sarah M.</h4>
                             <p>Toronto Homeowner</p>
@@ -185,7 +185,7 @@ export default function Home() {
                       <div className={styles.testimonialContent}>
                         <p>&quot;The attention to detail and professionalism of ARB Home Staging is unmatched. They truly understand the Toronto market.&quot;</p>
                         <div className={styles.testimonialAuthor}>
-                          <Image src="/images/img15.jpg" alt="John D." width={60} height={60} className={styles.authorImage} />
+                          <Image src="/images/img15.jpg" alt="John D." width={60} height={60} layout="fill" objectFit="cover" className={styles.authorImage} />
                           <div>
                             <h4>John D.</h4>
                             <p>Real Estate Agent</p>
