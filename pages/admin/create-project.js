@@ -164,7 +164,7 @@ export default function CreateProject() {
             options={{ 
               sources: ['local', 'url', 'camera'],
               multiple: true,
-              maxFiles: 10,
+              maxFiles: 50,
               resourceType: "auto"
             }}
             onUpload={handleUpload}
