@@ -123,6 +123,27 @@
   transition: all 0.3s ease;
 }
 
+.closeButton {
+  display: none;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 30px;
+  color: #333;
+  cursor: pointer;
+  z-index: 1003;
+}
+
+.menuOpen .closeButton {
+  display: block;
+}
+
+.menuOpen .hamburger {
+  display: none;
+}
+
 .hamburger span:nth-child(1) { top: 0; }
 .hamburger span:nth-child(2) { top: 50%; transform: translateY(-50%); }
 .hamburger span:nth-child(3) { bottom: 0; }
@@ -135,10 +156,17 @@
   .logo {
     height: 60px;
   }
+  .closeButton {
+    display: none;
+  }
 
+  .menuOpen .closeButton {
+    display: block;
+  }
   .nav {
     position: fixed;
     top: 80px;
+    padding-top: 60px;
     left: 0;
     right: 0;
     bottom: 0;

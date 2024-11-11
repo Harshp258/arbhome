@@ -9,6 +9,7 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
   const isHomePage = router.pathname === '/';
 
@@ -34,15 +35,36 @@ const Header = () => {
     };
   }, [handleScroll]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  const closeMenu = () => {
+    if (isMobile) {
+      setIsMenuOpen(false);
+    }
+  };
+
   return (
     <header className={`
       ${styles.header} 
       ${isScrolled ? styles.scrolled : ''} 
       ${isVisible ? styles.visible : styles.hidden}
       ${isHomePage ? styles.homePage : ''}
+      ${isMenuOpen ? styles.menuOpen : ''}
     `}>
       <div className={styles.headerContent}>
         <div className={styles.logoContainer}>
@@ -59,16 +81,16 @@ const Header = () => {
         <nav className={`${styles.nav} ${isMenuOpen ? styles.open : ''}`}>
           <ul className={styles.navList}>
             <li className={styles.navItem}>
-              <Link href="/" className={styles.navLink}>Home</Link>
+              <Link href="/" className={styles.navLink} onClick={closeMenu}>Home</Link>
             </li>
             <li className={styles.navItem}>
-              <Link href="/services" className={styles.navLink}>Services</Link>
+              <Link href="/services" className={styles.navLink} onClick={closeMenu}>Services</Link>
             </li>
             <li className={styles.navItem}>
-              <Link href="/about" className={styles.navLink}>About</Link>
+              <Link href="/about" className={styles.navLink} onClick={closeMenu}>About</Link>
             </li>
             <li className={styles.navItem}>
-              <Link href="/QuoteForm" className={styles.navLink}>Quick Quote</Link>
+              <Link href="/QuoteForm" className={styles.navLink} onClick={closeMenu}>Quick Quote</Link>
             </li>
           </ul>
         </nav>
@@ -77,6 +99,11 @@ const Header = () => {
           <span></span>
           <span></span>
         </div>
+        {isMenuOpen && isMobile && (
+          <button className={styles.closeButton} onClick={closeMenu}>
+            &times;
+          </button>
+        )}
       </div>
     </header>
   );

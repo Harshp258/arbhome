@@ -34,7 +34,7 @@ const Footer = () => {
           <ul className={styles.contactList}>
             <li>
               <FaEnvelope className={styles.icon} />
-              <a href="mailto:arbhomestaging904@gmail.com">arbhomestaging904@gmail.com</a>
+              <a href="mailto:arbhomestaging@hotmail.com">arbhomestaging@hotmail.com</a>
             </li>
             <li>
               <FaPhone className={styles.icon} />
