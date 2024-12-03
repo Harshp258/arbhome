@@ -3,7 +3,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import styles from '/styles/Header.module.css';
-
 const Header = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -16,13 +15,17 @@ const Header = () => {
   const handleScroll = useCallback(() => {
     if (typeof window !== 'undefined') {
       const currentScrollY = window.scrollY;
-      
+
       setIsScrolled(currentScrollY > 50);
 
-      if (currentScrollY > lastScrollY) {
-        setIsVisible(false);
-      } else {
+      if (currentScrollY <= 0) {
         setIsVisible(true);
+      } else {
+        if (currentScrollY > lastScrollY) {
+          setIsVisible(false);
+        } else {
+          setIsVisible(true);
+        }
       }
       setLastScrollY(currentScrollY);
     }
