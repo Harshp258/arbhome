@@ -3,7 +3,7 @@ import { supabase } from '../../lib/supabaseClient';
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { title, staging_type, address, description } = req.body;
-    
+    console.log(projectMedia);
     const { data, error } = await supabase
       .from('projects')
       .insert([

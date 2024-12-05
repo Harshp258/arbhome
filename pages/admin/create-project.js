@@ -1,3 +1,5 @@
+// admin/create-project.js
+
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { supabase } from '../../lib/supabaseClient';
@@ -12,6 +14,7 @@ export default function CreateProject() {
     address: '',
     description: '',
   });
+  
   const [projectMedia, setProjectMedia] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -45,11 +48,11 @@ export default function CreateProject() {
     setFormData(prevState => ({ ...prevState, [name]: value }));
   };
 
-  const handleUpload = (result) => {
+  const handleUploadSuccess = (result) => {
     if (result.event === "success") {
       const info = result.info;
       console.log(`Uploaded:`, info);
-      setProjectMedia(prev => [...prev, info]);
+      setProjectMedia(prev => [...prev, info]); // Store both image and video info
     }
   };
 
@@ -62,7 +65,15 @@ export default function CreateProject() {
     setLoading(true);
     setError(null);
 
+    // Check that we've got media to submit
+    if (projectMedia.length === 0) {
+      setError("Please upload at least one media item.");
+      setLoading(false);
+      return;
+    }
+
     try {
+      // Submit the project data to Supabase
       const { data: project, error: projectError } = await supabase
         .from('projects')
         .insert({
@@ -70,7 +81,7 @@ export default function CreateProject() {
           staging_type: formData.stagingType,
           address: formData.address,
           description: formData.description,
-          project_media: projectMedia.map(media => media.secure_url),
+          project_media: projectMedia.map(media => media.secure_url), // Ensure that video URLs are included
         })
         .select()
         .single();
@@ -91,17 +102,8 @@ export default function CreateProject() {
   }
 
   return (
-    <>
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
     <div className={styles.adminContainer}>
-      <div className={styles.adminHeader}>
-        <h1>Create New Project</h1>
-      </div>
+      <h1>Create New Project</h1>
       <form onSubmit={handleSubmit} className={styles.adminForm}>
         <div className={styles.formGroup}>
           <label htmlFor="title">Project Title</label>
@@ -115,6 +117,7 @@ export default function CreateProject() {
             required
           />
         </div>
+        
         <div className={styles.formGroup}>
           <label htmlFor="stagingType">Staging Type</label>
           <select
@@ -122,7 +125,7 @@ export default function CreateProject() {
             name="stagingType"
             value={formData.stagingType}
             onChange={handleChange}
-            className={styles.formSelect}
+            className={styles.formInput}
             required
           >
             <option value="">Select Staging Type</option>
@@ -134,8 +137,9 @@ export default function CreateProject() {
             <option value="Condo Staging">Condo Staging</option>
           </select>
         </div>
+
         <div className={styles.formGroup}>
-          <label htmlFor="address">Property Address</label>
+          <label htmlFor="address">Address</label>
           <input
             id="address"
             type="text"
@@ -146,8 +150,9 @@ export default function CreateProject() {
             required
           />
         </div>
+
         <div className={styles.formGroup}>
-          <label htmlFor="description">Project Description</label>
+          <label htmlFor="description">Description</label>
           <textarea
             id="description"
             name="description"
@@ -157,6 +162,7 @@ export default function CreateProject() {
             required
           />
         </div>
+
         <div className={styles.formGroup}>
           <label htmlFor="media">Project Media (Images and Video)</label>
           <CldUploadWidget
@@ -165,9 +171,9 @@ export default function CreateProject() {
               sources: ['local', 'url', 'camera'],
               multiple: true,
               maxFiles: 50,
-              resourceType: "auto"
+              resourceType: "auto"// Use 'auto' to support both images and videos
             }}
-            onUpload={handleUpload}
+            onSuccess={handleUploadSuccess} // Use the onSuccess callback
           >
             {({ open }) => (
               <button onClick={() => open()} type="button" className={styles.uploadButton}>
@@ -195,13 +201,12 @@ export default function CreateProject() {
             ))}
           </div>
         </div>
-        
+
         <button type="submit" className={styles.submitButton} disabled={loading}>
           {loading ? 'Creating...' : 'Create Project'}
         </button>
       </form>
       {error && <p className={styles.error}>{error}</p>}
     </div>
-    </>
   );
 }
