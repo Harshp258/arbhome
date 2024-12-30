@@ -102,6 +102,12 @@ export default function CreateProject() {
   }
 
   return (
+    <>
+    <br />
+    <br />
+    <br />
+    <br /> 
+    
     <div className={styles.adminContainer}>
       <h1>Create New Project</h1>
       <form onSubmit={handleSubmit} className={styles.adminForm}>
@@ -208,5 +214,10 @@ export default function CreateProject() {
       </form>
       {error && <p className={styles.error}>{error}</p>}
     </div>
-  );
+ 
+  <br />
+  <br />
+  <br />
+  </>
+   );
 }
