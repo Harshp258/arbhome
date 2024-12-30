@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/legacy/image';
 import styles from '../styles/Home.module.css';
-import BeforeAfterSlider from '../components/BeforeAfterSlider';
 import { supabase } from '../lib/supabaseClient';
+import { FaChevronRight, FaChevronLeft } from 'react-icons/fa'; // import icons for navigation
+import BeforeAfterSlider from '../components/BeforeAfterSlider';
 import { FaHome, FaClock, FaChartLine } from 'react-icons/fa';
 
 export default function Home() {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const sliderRef = useRef(null);
 
   useEffect(() => {
     fetchProjects();
@@ -20,23 +24,13 @@ export default function Home() {
     try {
       const { data, error } = await supabase
         .from('projects')
-        .select(`
-          id, 
-          title,
-          staging_type,
-          address,
-          description,
-          project_media
-        `)
-        .order('created_at', { ascending: false })
-        .limit(4);
-
+        .select('id, title, staging_type, address, description, project_media')
+        .order('created_at', { ascending: false });
       if (error) throw error;
-
       setProjects(data.map(project => ({
         ...project,
-        frontImage: project.project_media && project.project_media.length > 0 
-          ? project.project_media[0] 
+        frontImage: project.project_media && project.project_media.length > 0
+          ? project.project_media[0]
           : '/images/placeholder.jpg'
       })));
     } catch (error) {
@@ -45,6 +39,20 @@ export default function Home() {
       setLoading(false);
     }
   };
+
+  const handleNext = () => {
+    if (currentIndex < projects.length - 4) {
+      setCurrentIndex(prevIndex => prevIndex + 1);
+    }
+  };
+
+  const handlePrev = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(prevIndex => prevIndex - 1);
+    }
+  };
+
+
 
   return (
     <div className={styles.container}>
@@ -94,21 +102,37 @@ export default function Home() {
         </section>
 
         <section id="ourWorkSection" className={styles.ourWorkSection}>
-          <h2>Our Work</h2>
-          {loading ? (
-            <div>Loading projects...</div>
-          ) : (
-            <div className={styles.projectGrid}>
-              {projects.map((project) => (
+      <h2>Our Work</h2>
+      {loading ? (
+        <div>Loading projects...</div>
+      ) : (
+        <div className={styles.projectSliderContainer}>
+          <button 
+            className={`${styles.arrow} ${styles.prevArrow}`} 
+            onClick={handlePrev} 
+            aria-label="Previous project"
+            disabled={currentIndex === 0}
+          >
+            <FaChevronLeft />
+          </button>
+          <div className={styles.projectSlider} ref={sliderRef}>
+            <div 
+              className={styles.projectGrid} 
+              style={{ transform: `translateX(calc(-${currentIndex * 25}%))` }}
+            >
+              {projects.map((project, index) => (
                 <Link href={`/projects/${project.id}`} key={project.id}>
-                  <div className={styles.projectCard}>
+                  <div 
+                    className={`${styles.projectCard} ${index === currentIndex ? styles.active : ''} ${hoveredIndex === index ? styles.hovered : ''}`}
+                    onMouseEnter={() => setHoveredIndex(index)}
+                    onMouseLeave={() => setHoveredIndex(null)}
+                  >
                     <div className={styles.projectImageContainer}>
-                      <Image 
-                        src={project.frontImage} 
-                        alt={project.title} 
-                        className={styles.projectImage}
-                         layout="fill"
-                          objectFit="cover"
+                      <Image
+                        src={project.frontImage}
+                        alt={project.title}
+                        layout="fill"
+                        objectFit="cover"
                       />
                     </div>
                     <h3 className={styles.projectTitle}>{project.title}</h3>
@@ -116,8 +140,19 @@ export default function Home() {
                 </Link>
               ))}
             </div>
-          )}
-        </section>
+          </div>
+          <button 
+            className={`${styles.arrow} ${styles.nextArrow}`} 
+            onClick={handleNext} 
+            aria-label="Next project"
+            disabled={currentIndex >= projects.length - 4}
+          >
+            <FaChevronRight />
+          </button>
+        </div>
+      )}
+    </section>
+  
 
         <section className={styles.videoSection}>
           <video className={styles.heroVideo} autoPlay muted loop playsInline>
